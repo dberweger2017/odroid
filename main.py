@@ -1,35 +1,25 @@
-import wiringpi
+import mraa
 import time
 
-# Use WiringPi numbering
-wiringpi.wiringPiSetup()
+# Initialize PWM on PWM pin (Check your board's pinout for the right pin number)
+pwm_pin = 1  # Change this to your actual PWM pin number
+servo = mraa.Pwm(pwm_pin)
 
-pinNumber = 1  # Change this to your GPIO pin number
+# Enable the PWM pin
+servo.enable(True)
 
-# Set the pin to be in PWM output mode
-wiringpi.pinMode(pinNumber, wiringpi.GPIO.PWM_OUTPUT)
-
-# Set PWM mode to milliseconds type
-wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
-
-# Set the base frequency for PWM
-baseFrequency = 1920  # For 50Hz, change this if you need a different frequency
-wiringpi.pwmSetClock(baseFrequency)
-
-# Set the range for PWM
-rangeValue = 2000  # This is typical for servos
-wiringpi.pwmSetRange(rangeValue)
+# Set the PWM period in microseconds (this example uses 50Hz: 1/50 = 0.02s or 20000us)
+servo.period_us(20000)
 
 # Helper function to set the servo position
-def set_servo_position(pin, position):
-    # Convert the servo position (0-180) to PWM value
-    pwm_value = int(((position / 180.0) * (240 - 50)) + 50)
-    wiringpi.pwmWrite(pin, pwm_value)
+def set_servo_position(servo, position):
+    # Convert the servo position (0-180) to duty cycle (usually between 0.03 and 0.12)
+    duty_cycle = 0.03 + ((position / 180.0) * (0.12 - 0.03))
+    servo.write(duty_cycle)
 
 # Example: Move servo from 0 to 180 degrees, then back to 0
-set_servo_position(pinNumber, 0)
+set_servo_position(servo, 0)
 time.sleep(1)
-set_servo_position(pinNumber, 180)
+set_servo_position(servo, 180)
 time.sleep(1)
-set_servo_position(pinNumber, 0)
-
+set_servo_position(servo, 0)
