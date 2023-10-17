@@ -2,7 +2,7 @@ import odroid_wiringpi as wpi
 import time
 
 wpi.wiringPiSetup()
-wpi.pinMode(1, wpi.PWM_OUTPUT)
+wpi.pinMode(11, wpi.PWM_OUTPUT)
 
 while True:
     for duty_cycle in range(50, 250, 5):  # Adjust values to match your servo's specifications
