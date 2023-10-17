@@ -2,6 +2,9 @@ import odroid_wiringpi as wpi
 import time
 
 for i in range(1,40):
+
+    print(f"Trying pin {i}")
+
     wpi.wiringPiSetup()
     wpi.pinMode(i, wpi.PWM_OUTPUT)
 
