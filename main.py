@@ -1,8 +1,11 @@
 import odroid_wiringpi as wpi
 import time
+import os
 
 for i in range(1,40):
-
+    # Clear the terminal
+    os.system('clear' if os.name == 'nt' else 'clear')
+    
     print(f"Trying pin {i}")
 
     wpi.wiringPiSetup()
