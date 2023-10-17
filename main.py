@@ -1,28 +1,35 @@
-import RPi.GPIO as GPIO
+import wiringpi
 import time
 
-# Setup
-GPIO.setmode(GPIO.BCM)  # Use BCM numbering
-SERVO_PIN = 3  # Use PWM_D pin
-GPIO.setup(SERVO_PIN, GPIO.OUT)
+# Use WiringPi numbering
+wiringpi.wiringPiSetup()
 
-# Set the PWM frequency
-pwm = GPIO.PWM(SERVO_PIN, 50)  # 50Hz frequency
-pwm.start(7.5)  # Middle position
+pinNumber = 1  # Change this to your GPIO pin number
 
-try:
-    while True:
-        # Rotate servo to 0 degrees
-        pwm.ChangeDutyCycle(2.5)
-        time.sleep(1)
-        
-        # Rotate servo to 90 degrees (middle)
-        pwm.ChangeDutyCycle(7.5)
-        time.sleep(1)
-        
-        # Rotate servo to 180 degrees
-        pwm.ChangeDutyCycle(12.5)
-        time.sleep(1)
-except KeyboardInterrupt:
-    pwm.stop()
-    GPIO.cleanup()
+# Set the pin to be in PWM output mode
+wiringpi.pinMode(pinNumber, wiringpi.GPIO.PWM_OUTPUT)
+
+# Set PWM mode to milliseconds type
+wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
+
+# Set the base frequency for PWM
+baseFrequency = 1920  # For 50Hz, change this if you need a different frequency
+wiringpi.pwmSetClock(baseFrequency)
+
+# Set the range for PWM
+rangeValue = 2000  # This is typical for servos
+wiringpi.pwmSetRange(rangeValue)
+
+# Helper function to set the servo position
+def set_servo_position(pin, position):
+    # Convert the servo position (0-180) to PWM value
+    pwm_value = int(((position / 180.0) * (240 - 50)) + 50)
+    wiringpi.pwmWrite(pin, pwm_value)
+
+# Example: Move servo from 0 to 180 degrees, then back to 0
+set_servo_position(pinNumber, 0)
+time.sleep(1)
+set_servo_position(pinNumber, 180)
+time.sleep(1)
+set_servo_position(pinNumber, 0)
+
