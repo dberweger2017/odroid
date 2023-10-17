@@ -2,7 +2,7 @@ import mraa
 import time
 
 # Initialize PWM on PWM pin (Check your board's pinout for the right pin number)
-pwm_pin = 3  # Change this to your actual PWM pin number
+pwm_pin = 36  # Change this to your actual PWM pin number
 servo = mraa.Pwm(pwm_pin)
 
 # Enable the PWM pin
