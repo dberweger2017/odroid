@@ -4,7 +4,7 @@ import os
 
 # connect to odroid
 # connecting to a pwm pin (GPIO18)
-p = 1
+p = 3
 
 wpi.wiringPiSetup()
 wpi.pinMode(p, wpi.PWM_OUTPUT)
