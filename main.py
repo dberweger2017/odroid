@@ -1,8 +1,9 @@
 import odroid_wiringpi as wpi
 import time
 import os
+from tqdm import tqdm
 
-for i in range(1,40):
+for i in tqdm(range(1,40)):
     # Clear the terminal
     os.system('clear' if os.name == 'nt' else 'clear')
 
