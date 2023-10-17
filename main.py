@@ -2,12 +2,26 @@ import odroid_wiringpi as wpi
 import time
 import os
 
-#connect to odroid
+# connect to odroid
 # connecting to a pwm pin (GPIO18)
 p = 1
 
 wpi.wiringPiSetup()
 wpi.pinMode(p, wpi.PWM_OUTPUT)
+
+# set PWM mode to milliseconds
+wpi.pwmSetMode(wpi.PWM_MODE_MS)
+
+
+# set PWM range
+wpi.pwmSetRange(1000)
+
+# set PWM frequency
+wpi.pwmSetClock(375)
+
+# set initial duty cycle
+wpi.pwmWrite(p, 50)
+
 
 for _ in range(1):
     for duty_cycle in range(50, 250, 5):  # Adjust values to match your servo's specifications
