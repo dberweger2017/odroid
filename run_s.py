@@ -13,7 +13,7 @@ wpi.softPwmCreate(pin, 0, 200)
 st.title("Servo Controller")
 
 min_1 = 5
-max_1 = 22
+max_1 = 21
 
 # Streamlit slider
 angle_to_move = st.slider("Select angle to move to:", min_value=min_1, max_value=max_1, step=1)
