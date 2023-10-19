@@ -1,4 +1,4 @@
-import wiringpi as wpi
+import odroid_wiringpi as wpi
 
 # Initialize WiringPi
 wpi.wiringPiSetup()
