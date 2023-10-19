@@ -9,11 +9,23 @@ pin = 1
 # Create a software-controlled PWM
 wpi.softPwmCreate(pin, 0, 200)
 
-# Sweep the servo from 0 to 180 degrees
-for angle in range(0, 181):
-    duty_cycle = int((angle / 180.0) * 200)
-    wpi.softPwmWrite(pin, duty_cycle)
-    wpi.delay(10)  # Adjust delay to control speed of sweep
+try:
+    while True:
+        # Sweep the servo from 0 to 180 degrees
+        for angle in range(0, 181):
+            duty_cycle = int((angle / 180.0) * 200)
+            wpi.softPwmWrite(pin, duty_cycle)
+            wpi.delay(100)  # Adjust delay to control speed of sweep
+            print(angle)
 
-# Clean up
-wpi.pinMode(pin, wpi.INPUT)
+        for angle in range(180, -1, -1):
+            duty_cycle = int((angle / 180.0) * 200)
+            wpi.softPwmWrite(pin, duty_cycle)
+            wpi.delay(100)  # Adjust delay to control speed of sweep
+            print(angle)
+            
+except KeyboardInterrupt:
+    # Clean up
+    wpi.pinMode(pin, wpi.INPUT)
+
+
