@@ -12,7 +12,6 @@ wpi.pinMode(p, wpi.PWM_OUTPUT)
 # set PWM mode to milliseconds
 wpi.pwmSetMode(wpi.PWM_MODE_MS)
 
-
 # set PWM range
 wpi.pwmSetRange(1000)
 
