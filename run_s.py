@@ -38,3 +38,4 @@ if run:
         duty_cycle = int((rand / 180.0) * 200)
         wpi.softPwmWrite(pin, duty_cycle)
         st.write(f"Moved to angle: {rand}")
+        wpi.delay(200)
