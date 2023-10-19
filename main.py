@@ -24,7 +24,7 @@ try:
         for angle in range(max_1, -min_1-1, -1):
             duty_cycle = int((angle / 180.0) * 200)
             wpi.softPwmWrite(pin, duty_cycle)
-            wpi.delay(10)  # Adjust delay to control speed of sweep
+            wpi.delay(100)  # Adjust delay to control speed of sweep
             print(angle)
 
 except KeyboardInterrupt:
