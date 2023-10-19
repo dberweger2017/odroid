@@ -9,9 +9,6 @@ angle = st.slider("Angle", 0, 180, 90)
 # Initialize WiringPi
 wpi.wiringPiSetup()
 
-# Initialize WiringPi
-wpi.wiringPiSetup()
-
 pin = 1
 
 wpi.softPwmCreate(pin, 0, 200)
