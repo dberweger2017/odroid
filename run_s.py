@@ -1,5 +1,6 @@
 import streamlit as st
 import odroid_wiringpi as wpi
+import numpy as np
 
 # Initialize WiringPi
 wpi.wiringPiSetup()
@@ -26,3 +27,14 @@ try:
 
 except Exception as e:
     st.write(f"An error occurred: {e}")
+
+st.progress(0)
+
+run = st.button("Run")
+if run:
+    for i in range(100):
+        st.progress(i)
+        rand = np.random.randint(min_1, max_1)
+        duty_cycle = int((rand / 180.0) * 200)
+        wpi.softPwmWrite(pin, duty_cycle)
+        st.write(f"Moved to angle: {rand}")
